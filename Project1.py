@@ -50,7 +50,7 @@ def next_Response2():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        my_database=mysql.connector.connect(host="localhost",user="root",password="")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
         my_cursor=my_database.cursor()
         
         my_cursor.execute("Use project")
@@ -67,11 +67,11 @@ def next_Response2():
                   print("Success!!")
                   otp_ = random.randint(100000, 999999)
                   print(otp_,"##")
-                  sender_address = ""
-                  receiver_address = ""
+                  sender_address = "patilaniruddha01@gmail.com"
+                  receiver_address = "patilaniruddha@kccemsr.edu.in"
                   # receiver_address = x[2]
 
-                  passw = ""
+                  passw = "npmalzzrhkryhhxt"
                   try:
                       sendEmailFunc(sender_address,receiver_address,passw,str(otp_))
                       global OTP
@@ -112,7 +112,7 @@ def next_Response1():
             error_message = "Mobile number is Invalid!!"
             return render_template("Registration.html",error=error_message)
         else:
-            my_database=mysql.connector.connect(host="localhost",user="root",password="")
+            my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
             my_cursor=my_database.cursor()
             
             my_cursor.execute("Use project")
@@ -139,7 +139,7 @@ def verification():
         otp = request.form.get("otp")
         if int(otp)==int(OTP):
             print(OTP,"Final success")
-            my_database=mysql.connector.connect(host="localhost",user="root",password="")
+            my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
             my_cursor=my_database.cursor()
             
             my_cursor.execute("Use project")
