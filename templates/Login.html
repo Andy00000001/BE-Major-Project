@@ -1,35 +1,65 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Form site</title>
-		<script type="text/javascript">
-			function preventBack() {
-				window.history.forward(); 
-			}
-			  
-			setTimeout("preventBack()", 0);
-			  
-			window.onunload = function () { null };
-		</script>
-    </head>
-    <body bgcolor="skyblue"><br><br>
-        <form method="post" action="http://localhost:5000/next_Response2">
-            <table align="center"> <caption> Login Form </caption>
-                <tr>
-                    <td>Username : </td>
-                    <td><input type="text" name="username" placeholder="Enter Username" required></td>
-                </tr>
-                <tr>
-                    <td>Password : </td>
-                    <td><input type="password" name="password" placeholder="Enter Password" required></td>
-                </tr>
-                    <td></td>
-                    <td><input type="submit" value="Submit"></td>
-                </tr>
-            </table>
-        </form>
-		{% if error %}  
-        <p><strong>Error</strong>: {{error}}</p>  
-		{% endif %}  
-    </body>
+<html lang="en">
+<head>
+    <title>Major project</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">SpeeDTricK</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="login.html">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">SERVICE</a></li>
+                    <li><a href="#">DESIGN</a></li>
+                    <li><a href="#">CONTACT</a></li>  
+                </ul>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+
+        </div> 
+        <div class="content">
+            <h1>Integration <br><span>Supply</span> <br>Management</h1>
+            <p class="par">join us to great auto service .  
+                 we are making a hosting platform. <br> here is the best page to find good and quality parts , 
+                <br> let's start the journey</p>
+
+                <button class="cn"><a href="#">JOIN US</a></button>
+
+                <div class="form">
+                    <h2>Login Here</h2>
+                    <input type="email" name="email" placeholder="Enter Email Here">
+                    <input type="password" name="" placeholder="Enter Password Here">
+                    <button class="btnn"><a href="#">Login</a></button>
+
+                    <p class="link">Don't have an account<br>
+                    <a href="#">Sign up </a> here</a></p>
+                    <p class="liw">Log in with</p>
+
+                    <div class="icons">
+                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                    </div>
+
+                </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
 </html>
+<!--code by @Sangharaj -->
