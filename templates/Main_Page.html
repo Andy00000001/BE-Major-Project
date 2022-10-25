@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Major project</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 
             <div class="menu">
                 <ul>
-                    <li><a href="login.html">HOME</a></li>
+                    <li><a href="Main_Page.html">HOME</a></li>
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="#">SERVICE</a></li>
                     <li><a href="#">DESIGN</a></li>
@@ -37,13 +37,16 @@
                 <button class="cn"><a href="#">JOIN US</a></button>
 
                 <div class="form">
+				    <form method="post" action="http://localhost:5000/next_Response2">
                     <h2>Login Here</h2>
-                    <input type="email" name="email" placeholder="Enter Email Here">
-                    <input type="password" name="" placeholder="Enter Password Here">
-                    <button class="btnn"><a href="#">Login</a></button>
+                    <input type="text" name="username" placeholder="Enter Username Here">
+                    <input type="password" name="password" placeholder="Enter Password Here">
+                    <input type="submit" value="Submit">
+					</form>
 
                     <p class="link">Don't have an account<br>
-                    <a href="#">Sign up </a> here</a></p>
+					<ul>
+                        <li><a href="Registration.html">Sign up</a></li>here</a></ul></p>
                     <p class="liw">Log in with</p>
 
                     <div class="icons">
@@ -59,7 +62,9 @@
                 </div>
         </div>
     </div>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    {% if error %}  
+    <p><strong>Error</strong>: {{error}}</p>  
+	{% endif %}
 </body>
 </html>
 <!--code by @Sangharaj -->

@@ -1,7 +1,8 @@
 """
-Created on Mon Apr 11 16:39:51 2022
 
 @author: Aniruddha Patil
+
+
 """
 
 from flask import Flask,render_template,request
@@ -60,7 +61,7 @@ def next_Response2():
             
             if my_result == []:
                 error_message="User is not registered!!"
-                return render_template("Login.html",error =error_message)
+                return render_template("Main_Page.html",error =error_message)
 
             for x in my_result:
               if str(username) == x[0] and str(password) == x[1]:
@@ -86,13 +87,13 @@ def next_Response2():
                   print("Incorrect username or password!")
                   error_message = "Incorrect username or password!"
             
-                  return render_template("Login.html",error =error_message)
+                  return render_template("Main_Page.html",error =error_message)
         except:
             error_message = "Incorrect username or password!"
             
-            return render_template("Login.html",error =error_message)
+            return render_template("Main_Page.html",error =error_message)
     
-    return render_template("Login.html")
+    return render_template("Main_Page.html")
 
 @app.route('/next_Response1',methods=['GET','POST'])
 def next_Response1():
@@ -124,7 +125,7 @@ def next_Response1():
                 my_cursor.close()
                 print("Record inserted successfully in database")
                 
-                return render_template("Login.html")
+                return render_template("Main_Page.html")
             except:
                 print("Already record present!")
                 error_message = "Username or password or mobile number is already used!! Try with other."
