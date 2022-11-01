@@ -11,20 +11,16 @@
 			  
 			window.onunload = function () { null };
 		</script>
+		<title>Major project_display page</title>
+        <link rel="stylesheet" href="static/css/style_display.css">
     </head>
-    <body bgcolor="skyblue"><br><br>
-            <table align="center"> <caption><h2> Student Details </h2></caption>
-                <tr>
-                    <td><h3>Username : </h3></td>
-                    <td>{{uname}}</td>
-                </tr>
-                <tr>
-                    <td><h3>E-Mail : </h3></td><td>{{email}}</td>
-                </tr>
-                <tr>
-                    <td><h3>Mobile Number : </h3></td>
-                    <td>{{mobile}}</td>
-                </tr>
-            </table>
+    <body>
+	    <div class="main">
+        <caption><h2> Student Details </h2></caption>
+                <h3>Username : </h3>
+                {{uname}}
+                <h3>E-Mail : </h3>{{email}}
+                <h3>Mobile Number : </h3>
+                {{mobile}}
     </body>
 </html>
