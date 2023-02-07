@@ -22,7 +22,7 @@
 
             <div class="menu">
                 <ul>
-                    <li><a href="{{url_for('next_Response2')}}">HOME</button></a></li>
+                    <li><a href="{{url_for('verification')}}">HOME</button></a></li>
                     <li><a href="#">ABOUT</a></li>
                     <li><a href="#">SERVICE</a></li>
                     <li><a href="#">DESIGN</a></li>
@@ -44,27 +44,15 @@
 
                 <button class="cn"><a href="#">JOIN US</a></button>
 
-                <div class="form">
-				    <form method="post" action="http://localhost:5000/next_Response2">
-                    <h2>Login Here</h2>
-                    <input type="text" name="username" placeholder="Enter Username Here">
-                    <input type="password" name="password" placeholder="Enter Password Here">
-                    <button class="cn" type="submit" value="Submit"><a>Submit</a></button>
-					</form>
-					<ul>
-                      <p class="link">Don't have an account</p>
-					  <li><a href="{{url_for('next_Response1')}}">Sign Up</button></a></li>
-                      <p class="liw">Log in with</p>
-                    </ul>
-                    <div class="icons">
-                        <a href="https://www.facebook.com/home.php"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-                    </div>
+                
+				<caption><h2> Welcome ! </h2></caption>
+                <h3>Username : </h3>
+                {{uname}}
+                <h3>E-Mail : </h3>{{email}}
+                <h3>Mobile Number : </h3>
+                {{mobile}}
 
-                </div>
+                
         </div>
     </div>
     {% if error %}  

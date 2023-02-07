@@ -72,7 +72,7 @@ def next_Response2():
                   receiver_address = "patilaniruddha@kccemsr.edu.in"
                   # receiver_address = x[2]
 
-                  passw = "npmalzzrhkryhhxt"
+                  passw = "ddbfdvdnuhavvzsr"
                   try:
                       sendEmailFunc(sender_address,receiver_address,passw,str(otp_))
                       global OTP
@@ -149,7 +149,7 @@ def verification():
                 my_result = my_cursor.fetchall()
                 
                 print(my_result[0][0])
-                return render_template("Display_Details.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])                    
+                return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])                    
             except:
                 error_message= "Result not found!"
                 return render_template('Final_Verification.html',error=error_message)
