@@ -160,6 +160,27 @@ def verification():
     return render_template('Main_Page.html')
 
 
+@app.route('/next_Response3',methods=['GET'])
+def next_Response3():
+    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_cursor=my_database.cursor()
+            
+    my_cursor.execute("Use project")
+    try:
+                my_cursor.execute("SELECT * FROM details where pass='"+str(Pwd)+"'")
+                my_result = my_cursor.fetchall()
+                
+                print(my_result[0][0])
+                return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])                    
+    except:
+                error_message= "Result not found!"
+                return render_template('Final_Verification.html',error=error_message)
+
+
+@app.route('/next_Response4',methods=['GET'])
+def next_Response4():
+    return render_template('About.html')
+
 if __name__=='__main__':
     app.run(host="localhost",port=5000,threaded=False)
     

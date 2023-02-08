@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script type="text/javascript">
-			function preventBack() {
-				window.history.forward(); 
-			}
-			  
-			setTimeout("preventBack()", 0);
-			  
-			window.onunload = function () { null };
-	</script>
     <title>Major project_main page</title>
     <link rel="stylesheet" href="static/css/style_main.css">
 </head>
@@ -23,7 +14,7 @@
             <div class="menu">
                 <ul>
                     <li><a href="{{url_for('next_Response2')}}">HOME</button></a></li>
-                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="{{url_for('next_Response4')}}">ABOUT</a></li>
                     <li><a href="#">SERVICE</a></li>
                     <li><a href="#">DESIGN</a></li>
                     <li><a href="#">CONTACT</a></li>  
