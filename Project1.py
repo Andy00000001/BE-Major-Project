@@ -181,6 +181,34 @@ def next_Response3():
 def next_Response4():
     return render_template('About.html')
 
+
+@app.route('/next_Response5',methods=['GET', 'POST'])
+def next_Response5():
+    if request.method == 'POST':
+        products = request.form.get("products")
+        services = request.form.get("services")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_cursor=my_database.cursor()
+            
+        my_cursor.execute("Use project")
+
+        my_cursor.execute("SELECT * FROM details where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        for x in my_result:
+            username = x[0]
+            password = x[1]
+            email = x[2]
+            mobile = x[3]
+
+        sql = "INSERT INTO details(username,pass,email,mobile,products,services) VALUES(%s,%s,%s,%s,%s,%s)"
+        val = (str(username), str(password),str(email),int(mobile),str(products),str(services))
+        my_cursor.execute(sql, val)
+        my_database.commit()
+        my_cursor.close()
+        print("Record inserted successfully in database")
+    return render_template("Main_Display.html")
+
+
 if __name__=='__main__':
     app.run(host="localhost",port=5000,threaded=False)
     
