@@ -200,13 +200,25 @@ def next_Response5():
             email = x[2]
             mobile = x[3]
 
-        sql = "INSERT INTO details(username,pass,email,mobile,products,services) VALUES(%s,%s,%s,%s,%s,%s)"
+        sql = "INSERT INTO user(username,pass,email,mobile,products,services) VALUES(%s,%s,%s,%s,%s,%s)"
         val = (str(username), str(password),str(email),int(mobile),str(products),str(services))
         my_cursor.execute(sql, val)
         my_database.commit()
         my_cursor.close()
         print("Record inserted successfully in database")
-    return render_template("Main_Display.html")
+    print(my_result[0][0])
+    return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+
+
+@app.route('/next_Response6',methods=['GET'])
+def next_Response6():
+    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_cursor=my_database.cursor()
+    my_cursor.execute("Use project")
+    my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
+    my_result = my_cursor.fetchall()
+    print(my_result[0][0])
+    return render_template("Main_Prod.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3],products=my_result[0][4],services=my_result[0][5])
 
 
 if __name__=='__main__':
