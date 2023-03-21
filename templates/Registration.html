@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Major Project_reg page</title>
-		<link rel="stylesheet" href="static/css/style_registration.css">
-		<script type="text/javascript">
+        <script type="text/javascript">
 			function preventBack() {
 				window.history.forward(); 
 			}
@@ -11,8 +9,9 @@
 			setTimeout("preventBack()", 0);
 			  
 			window.onunload = function () { null };
-			
-	  </script>
+		</script>
+        <title>Major Project_reg page</title>
+		<!--link rel="stylesheet" href="static/css/style_registration.css"-->
     </head>
     <body>
 	<div class="main">
@@ -25,7 +24,7 @@
                 <input type="password" name="password" placeholder="Enter Password" required>
                 E-Mail : <input type="email" name="email" placeholder="Enter Email" required>
                 Mobile Number : 
-                    <input type="text" name="mobile" placeholder="Enter Mobile Number" required>
+                    <input type="number" name="mobile" placeholder="Enter Mobile Number" required>
                     <button class="cn" type="submit" value="Submit" onclick="flashMessage()"><a>Submit</a></button>
 			</div>
         </form>

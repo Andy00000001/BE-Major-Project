@@ -12,8 +12,23 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import random
+import glob
+import os
+import base64
 
 app = Flask(__name__)
+
+
+def convertToImageData(data1,filename):
+    with open(filename, "wb") as fh:
+        imageData = fh.write(base64.decodebytes(data1))
+    return imageData
+
+def convertToBinaryData(filename):
+    # Convert digital data to binary format
+    with open(filename, 'rb') as file:
+        binaryData = file.read()
+    return binaryData
 
 
 
@@ -122,6 +137,17 @@ def next_Response1():
                 val = (str(username), str(password),str(email),int(mobile))
                 my_cursor.execute(sql, val)
                 my_database.commit()
+                
+                sql = "INSERT INTO supply(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
+                val = (str(username), str(password),str(email),int(mobile))
+                my_cursor.execute(sql, val)
+                my_database.commit()
+
+                sql = "INSERT INTO user(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
+                val = (str(username), str(password),str(email),int(mobile))
+                my_cursor.execute(sql, val)
+                my_database.commit()
+
                 my_cursor.close()
                 print("Record inserted successfully in database")
                 
@@ -137,6 +163,7 @@ def next_Response1():
 @app.route('/verification',methods=['GET','POST'])
 def verification():        
     if request.method == 'POST':
+        print(OTP)
         otp = request.form.get("otp")
         if int(otp)==int(OTP):
             print(OTP,"Final success")
@@ -186,6 +213,87 @@ def next_Response4():
 def next_Response5():
     if request.method == 'POST':
         products = request.form.get("products")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_cursor=my_database.cursor()
+            
+        my_cursor.execute("Use project")
+
+        my_cursor.execute("SELECT * FROM details where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        for x in my_result:
+            username = x[0]
+            password = x[1]
+            email = x[2]
+            mobile = x[3]
+        
+        with_img = glob.glob("./static/images/products/*")
+        with_img_list = []
+        for data in with_img:
+            with_img_list.append(data.split("\\")[-1].split(".")[0])
+        
+        if str(products) in with_img_list:
+            path1 = str(os.getcwd()+"/static/images/products/"+str(products)+".jpg", "UTF-8")
+            image_data1 = convertToBinaryData(path1)
+        else:
+            path1 = str(os.getcwd()+"/static/images/placeholder.jpg","UTF-8")
+            image_data1 = convertToBinaryData(path1)
+
+        print(path1)
+        sql="INSERT INTO supply(username,pass,email,mobile,products,services,prod_images,serv_images) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
+        val = (str(username), str(password),str(email),int(mobile),str(products),None,image_data1,None)
+        my_cursor.execute(sql, val)
+        my_database.commit()
+        my_cursor.close()
+        print("Record inserted successfully in database")
+        
+        my_cursor=my_database.cursor()
+            
+        my_cursor.execute("Use project")
+        my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        try:
+            print(my_result)
+            new_list1 = []
+            for data in my_result:
+                print(data)
+                new_list1.append([data[4],data[5],path1,data[7]])
+            
+            print(path1)
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Supplier.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+        except:
+            error_message= "Supplier not found!"
+            return render_template('Supplier.html',error=error_message)
+
+    print(my_result[0][0])
+    return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+
+
+@app.route('/next_Response6',methods=['GET'])
+def next_Response6():
+    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_cursor=my_database.cursor()
+    my_cursor.execute("Use project")
+    my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
+    my_result = my_cursor.fetchall()
+    print(my_result[0][0])
+    return render_template("Main_Prod.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3],products=my_result[0][4])
+    
+
+@app.route('/next_Response7',methods=['GET'])
+def next_Response7():
+    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_cursor=my_database.cursor()
+    my_cursor.execute("Use project")
+    my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
+    my_result = my_cursor.fetchall()
+    print(my_result[0][0])
+    return render_template("Main_Prod.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3],services=my_result[0][4])
+
+
+@app.route('/next_Response8',methods=['GET', 'POST'])
+def next_Response8():
+    if request.method == 'POST':
         services = request.form.get("services")
         my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
         my_cursor=my_database.cursor()
@@ -200,25 +308,95 @@ def next_Response5():
             email = x[2]
             mobile = x[3]
 
-        sql = "INSERT INTO user(username,pass,email,mobile,products,services) VALUES(%s,%s,%s,%s,%s,%s)"
-        val = (str(username), str(password),str(email),int(mobile),str(products),str(services))
+        sql = "INSERT INTO supply(username,pass,email,mobile,services) VALUES(%s,%s,%s,%s,%s)"
+        val = (str(username), str(password),str(email),int(mobile),str(services))
         my_cursor.execute(sql, val)
         my_database.commit()
         my_cursor.close()
         print("Record inserted successfully in database")
+
+        my_cursor=my_database.cursor()
+            
+        my_cursor.execute("Use project")
+        my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        try:
+            print(my_result)
+            new_list1 = []
+            for data in my_result:
+                print(data)
+                new_list1.append([data[4],data[5]])
+            
+            print(new_list1)
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Supplier.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+        except:
+            error_message= "Supplier not found!"
+            return render_template('Supplier.html',error=error_message)
+
     print(my_result[0][0])
     return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
 
 
-@app.route('/next_Response6',methods=['GET'])
-def next_Response6():
-    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
-    my_cursor=my_database.cursor()
-    my_cursor.execute("Use project")
-    my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
-    my_result = my_cursor.fetchall()
-    print(my_result[0][0])
-    return render_template("Main_Prod.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3],products=my_result[0][4],services=my_result[0][5])
+@app.route('/next_Response9',methods=['GET','POST'])
+def next_Response9():
+    if request.method == 'POST':
+        return render_template("Options.html")
+    return render_template("Main_Display.html")
+
+
+@app.route('/next_Response10',methods=['GET','POST'])
+def next_Response10():
+    if request.method == 'POST':
+        services_for = request.form.get("services")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_cursor=my_database.cursor()
+        my_cursor.execute("Use project")
+        my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        try:
+            print(my_result)
+            new_list1 = []
+            for data in my_result:
+                print(data)
+                new_list1.append([data[4],data[5]])
+            
+            print(new_list1)
+
+
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Supplier.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+        except:
+            error_message= "Supplier not found!"
+            return render_template('Options.html',error=error_message)
+    
+    return render_template("Options.html")
+
+@app.route('/next_Response11',methods=['GET','POST'])
+def next_Response11():
+    if request.method == 'POST':
+        services_for = request.form.get("Srv")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_cursor=my_database.cursor()
+        my_cursor.execute("Use project")
+        my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        try:
+            print(my_result)
+            new_list1 = []
+            for data in my_result:
+                print(data)
+                new_list1.append([data[4],data[5]])
+            
+            print(new_list1)
+            
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Customer.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+        except:
+            error_message= "Supplier not found!"
+            return render_template('Customer.html',error=error_message)
+    
+    return render_template("Options.html")
 
 
 if __name__=='__main__':
