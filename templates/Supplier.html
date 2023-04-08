@@ -13,13 +13,6 @@
 
         </div> 
         <div class="content">
-            <caption><h2> Welcome ! </h2></caption><br>
-
-                <h3>Username : </h3>{{uname}}
-                <h3>E-Mail : </h3>{{email}}
-                <h3>Mobile Number : </h3>{{mobile}}
-                <br><br><br>
-
                 <table>
                     <tr><th style= "padding:15px;">PRODUCTS</th>
                         <th style= "padding:15px;">PRODUCT IMAGES</th>
@@ -29,9 +22,10 @@
                     {% for sub_data in data1 %}
                             <tr>
                             <td style= "padding:15px;">{{sub_data[0]}}</td>
-                            <td style= "padding:15px;"><img src="C:\\Users\\ANIRUDDHA\\Major_Project\\BE-Major-Project/static/images/products/clutch.jpg" width = "120" height = "90"/></td>
+                            <td style= "padding:15px;"><img src="data:image/jpeg;base64,{{ image_data }}" alt="Image">
+                            </td>
                             <td style= "padding:15px;">{{sub_data[1]}}</td>
-                            <td style= "padding:15px;"><img src={{sub_data[3]}} width = "120" height = "90"/></td>
+                            <td style= "padding:15px;"><img src="{{sub_data[3]}}" width = "120" height = "90"/></td>
                             </tr>
                     {% endfor %}
                 </table>
@@ -54,6 +48,7 @@
 				    <form method="post" action="http://localhost:5000/next_Response5">
                     <h2>Add products Here</h2>
                     <input type="text" name="products" placeholder="Enter Product Here">
+                    <input type="file" name="image">
                     <button class="cn" type="submit" value="Submit1"><a>Submit</a></button>
 					</form>
                 </div>
@@ -62,6 +57,7 @@
 				    <form method="post" action="http://localhost:5000/next_Response8">
                     <h2>Add services Here</h2>
                     <input type="text" name="services" placeholder="Enter Service Here">
+                    <input type="file" name="image">
                     <button class="cn" type="submit" value="Submit2"><a>Submit</a></button>
 					</form>
                 </div>

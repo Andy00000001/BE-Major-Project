@@ -8,6 +8,8 @@
 from flask import Flask,render_template,request
 #,redirect,url_for
 import mysql.connector
+from PIL import Image
+from io import BytesIO
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -232,13 +234,12 @@ def next_Response5():
             with_img_list.append(data.split("\\")[-1].split(".")[0])
         
         if str(products) in with_img_list:
-            path1 = str(os.getcwd()+"/static/images/products/"+str(products)+".jpg", "UTF-8")
+            path1 = os.path.join(os.getcwd(), "static", "images", "products", f"{products}.jpg")
             image_data1 = convertToBinaryData(path1)
         else:
             path1 = str(os.getcwd()+"/static/images/placeholder.jpg","UTF-8")
             image_data1 = convertToBinaryData(path1)
 
-        print(path1)
         sql="INSERT INTO supply(username,pass,email,mobile,products,services,prod_images,serv_images) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
         val = (str(username), str(password),str(email),int(mobile),str(products),None,image_data1,None)
         my_cursor.execute(sql, val)
@@ -252,15 +253,15 @@ def next_Response5():
         my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
         my_result = my_cursor.fetchall()
         try:
+            image_base64_data = base64.b64encode(my_result[0][6]).decode('utf-8')
             print(my_result)
             new_list1 = []
             for data in my_result:
                 print(data)
                 new_list1.append([data[4],data[5],path1,data[7]])
             
-            print(path1)
-        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
-            return render_template("Supplier.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+            # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Supplier.html", image_data=image_base64_data, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
         except:
             error_message= "Supplier not found!"
             return render_template('Supplier.html',error=error_message)
@@ -379,7 +380,7 @@ def next_Response11():
         my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
         my_cursor=my_database.cursor()
         my_cursor.execute("Use project")
-        my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
+        my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
         my_result = my_cursor.fetchall()
         try:
             print(my_result)
