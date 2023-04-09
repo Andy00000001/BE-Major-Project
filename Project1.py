@@ -62,6 +62,56 @@ def message():
     return render_template('Main_Page.html')
 
 
+@app.route('/next_Response1',methods=['GET','POST'])
+def next_Response1():
+    if request.method == 'POST':
+        username = request.form.get("username")
+        password = request.form.get("password")
+        email = request.form.get("email")
+        mobile = request.form.get("mobile")
+        
+        # print(str(username), str(password),str(email),int(mobile))
+        # username,password,email,mobile = "Aniruddha", "abcd","abc@gmail.com","9101010101"
+        try:
+            if len(str(int(mobile)))!=10:
+                error_message="Mobile number is Invalid!!"
+                return render_template("Registration.html",error=error_message)
+        except:
+            error_message = "Mobile number is Invalid!!"
+            return render_template("Registration.html",error=error_message)
+        else:
+            my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+            my_cursor=my_database.cursor()
+            
+            my_cursor.execute("Use project")
+            try:
+                sql = "INSERT INTO details(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
+                val = (str(username), str(password),str(email),int(mobile))
+                my_cursor.execute(sql, val)
+                my_database.commit()
+                
+                sql = "INSERT INTO supply(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
+                val = (str(username), str(password),str(email),int(mobile))
+                my_cursor.execute(sql, val)
+                my_database.commit()
+
+                sql = "INSERT INTO user(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
+                val = (str(username), str(password),str(email),int(mobile))
+                my_cursor.execute(sql, val)
+                my_database.commit()
+
+                my_cursor.close()
+                print("Record inserted successfully in database")
+                
+                return render_template("Main_Page.html")
+            except:
+                print("Already record present!")
+                error_message = "Username or password or mobile number is already used!! Try with other."
+                return render_template("Registration.html",error=error_message)
+    else:
+        return render_template("Registration.html")
+
+
 @app.route('/next_Response2',methods=['GET','POST'])
 def next_Response2():
     if request.method == 'POST':
@@ -111,55 +161,6 @@ def next_Response2():
             return render_template("Main_Page.html",error =error_message)
     
     return render_template("Main_Page.html")
-
-@app.route('/next_Response1',methods=['GET','POST'])
-def next_Response1():
-    if request.method == 'POST':
-        username = request.form.get("username")
-        password = request.form.get("password")
-        email = request.form.get("email")
-        mobile = request.form.get("mobile")
-        
-        # print(str(username), str(password),str(email),int(mobile))
-        # username,password,email,mobile = "Aniruddha", "abcd","abc@gmail.com","9101010101"
-        try:
-            if len(str(int(mobile)))!=10:
-                error_message="Mobile number is Invalid!!"
-                return render_template("Registration.html",error=error_message)
-        except:
-            error_message = "Mobile number is Invalid!!"
-            return render_template("Registration.html",error=error_message)
-        else:
-            my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
-            my_cursor=my_database.cursor()
-            
-            my_cursor.execute("Use project")
-            try:
-                sql = "INSERT INTO details(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
-                val = (str(username), str(password),str(email),int(mobile))
-                my_cursor.execute(sql, val)
-                my_database.commit()
-                
-                sql = "INSERT INTO supply(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
-                val = (str(username), str(password),str(email),int(mobile))
-                my_cursor.execute(sql, val)
-                my_database.commit()
-
-                sql = "INSERT INTO user(username,pass,email,mobile) VALUES(%s,%s,%s,%s)"
-                val = (str(username), str(password),str(email),int(mobile))
-                my_cursor.execute(sql, val)
-                my_database.commit()
-
-                my_cursor.close()
-                print("Record inserted successfully in database")
-                
-                return render_template("Main_Page.html")
-            except:
-                print("Already record present!")
-                error_message = "Username or password or mobile number is already used!! Try with other."
-                return render_template("Registration.html",error=error_message)
-    else:
-        return render_template("Registration.html")
         
     
 @app.route('/verification',methods=['GET','POST'])
@@ -234,7 +235,7 @@ def next_Response5():
             with_img_list.append(data.split("\\")[-1].split(".")[0])
         
         if str(products) in with_img_list:
-            path1 = os.path.join(os.getcwd(), "static", "images", "products", f"{products}.jpg")
+            path1 = os.path.join(os.getcwd(), "static", "images", "products", f"{products}.jpeg")
             image_data1 = convertToBinaryData(path1)
         else:
             path1 = str(os.getcwd()+"/static/images/placeholder.jpg","UTF-8")
@@ -253,15 +254,14 @@ def next_Response5():
         my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
         my_result = my_cursor.fetchall()
         try:
-            image_base64_data = base64.b64encode(my_result[0][6]).decode('utf-8')
-            print(my_result)
             new_list1 = []
             for data in my_result:
                 print(data)
-                new_list1.append([data[4],data[5],path1,data[7]])
+                new_list1.append([data[4],data[5],path1,base64.b64encode(data[6]).decode('utf-8'),base64.b64encode(data[7]).decode('utf-8')])
+                print(new_list1)                
             
             # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
-            return render_template("Supplier.html", image_data=image_base64_data, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+            return render_template("Supplier.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
         except:
             error_message= "Supplier not found!"
             return render_template('Supplier.html',error=error_message)
@@ -398,6 +398,21 @@ def next_Response11():
             return render_template('Customer.html',error=error_message)
     
     return render_template("Options.html")
+
+
+@app.route('/next_Response12',methods=['GET'])
+def next_Response12():
+    return render_template('About_MDisp.html')
+
+
+@app.route('/next_Response13',methods=['GET'])
+def next_Response13():
+    return render_template('Contact.html')
+
+
+@app.route('/next_Response14',methods=['GET'])
+def next_Response14():
+    return render_template('Contact_MDisp.html')
 
 
 if __name__=='__main__':

@@ -21,11 +21,12 @@
                     </tr>
                     {% for sub_data in data1 %}
                             <tr>
-                            <td style= "padding:15px;">{{sub_data[0]}}</td>
-                            <td style= "padding:15px;"><img src="data:image/jpeg;base64,{{ image_data }}" alt="Image">
-                            </td>
-                            <td style= "padding:15px;">{{sub_data[1]}}</td>
-                            <td style= "padding:15px;"><img src="{{sub_data[3]}}" width = "120" height = "90"/></td>
+                                <script>document.write(sub_data[3])</script>
+                                <td style= "padding:15px;">{{sub_data[0]}}</td>
+                                <td style= "padding:15px;"><img src="data:image/jpeg;base64,{sub_data[3]}" width = "120" height = "90" alt="Image1"/>
+                                </td>
+                                <td style= "padding:15px;">{{sub_data[1]}}</td>
+                                <td style= "padding:15px;"><img src="data:image/jpeg;base64,{sub_data[4]}" width = "120" height = "90" alt="Image2"/></td>
                             </tr>
                     {% endfor %}
                 </table>
