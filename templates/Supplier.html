@@ -15,18 +15,18 @@
         <div class="content">
                 <table>
                     <tr><th style= "padding:15px;">PRODUCTS</th>
-                        <th style= "padding:15px;">PRODUCT IMAGES</th>
+                        <!--th style= "padding:15px;">PRODUCT IMAGES</th-->
                         <th style= "padding:15px;">SERVICES</th>
-                        <th style= "padding:15px;">SERVICE IMAGES</th>
+                        <!--th style= "padding:15px;">SERVICE IMAGES</th-->
                     </tr>
                     {% for sub_data in data1 %}
                             <tr>
                                 <script>document.write(sub_data[3])</script>
                                 <td style= "padding:15px;">{{sub_data[0]}}</td>
-                                <td style= "padding:15px;"><img src="data:image/jpeg;base64,{sub_data[3]}" width = "120" height = "90" alt="Image1"/>
-                                </td>
+                                <!--td style= "padding:15px;"><img src="data:image/jpg;base64,{sub_data[3]}" width = "120" height = "90" alt="Image1"/>
+                                </td-->
                                 <td style= "padding:15px;">{{sub_data[1]}}</td>
-                                <td style= "padding:15px;"><img src="data:image/jpeg;base64,{sub_data[4]}" width = "120" height = "90" alt="Image2"/></td>
+                                <!--td style= "padding:15px;"><img src="data:image/jpg;base64,{sub_data[4]}" width = "120" height = "90" alt="Image2"/></td-->
                             </tr>
                     {% endfor %}
                 </table>
@@ -34,31 +34,23 @@
                 <div class="menu">
                     <ul>
                         <li><a href="{{url_for('next_Response3')}}">HOME</button></a></li>
-                        <li><a href="{{url_for('next_Response4')}}">ABOUT</a></li>
-                        <li><a href="#">CONTACT</a></li>  
-                        <li><a href="#">JOIN US</a></li>
                     </ul>
                 </div>
 
-                <div class="search">
-                    <input class="srch" type="search" name="" placeholder="Type To text">
-                    <a href="#"> <button class="btn">Search</button></a>
-                </div><br>
-
                 <div class="form">
-				    <form method="post" action="http://localhost:5000/next_Response5">
+				    <form method="post" action="http://localhost:5000/next_Response8">
                     <h2>Add products Here</h2>
                     <input type="text" name="products" placeholder="Enter Product Here">
-                    <input type="file" name="image">
+                    <!--input type="file" name="image"-->
                     <button class="cn" type="submit" value="Submit1"><a>Submit</a></button>
 					</form>
                 </div>
 
                 <div class="form">
-				    <form method="post" action="http://localhost:5000/next_Response8">
+				    <form method="post" action="http://localhost:5000/next_Response9">
                     <h2>Add services Here</h2>
                     <input type="text" name="services" placeholder="Enter Service Here">
-                    <input type="file" name="image">
+                    <!--input type="file" name="image"-->
                     <button class="cn" type="submit" value="Submit2"><a>Submit</a></button>
 					</form>
                 </div>

@@ -136,8 +136,8 @@ def next_Response2():
                   otp_ = random.randint(100000, 999999)
                   print(otp_,"##")
                   sender_address = "patilaniruddha01@gmail.com"
-                  receiver_address = "patilaniruddha@kccemsr.edu.in"
-                  # receiver_address = x[2]
+                  #receiver_address = "patilaniruddha@kccemsr.edu.in"
+                  receiver_address = x[2]
 
                   passw = "ddbfdvdnuhavvzsr"
                   try:
@@ -212,8 +212,24 @@ def next_Response4():
     return render_template('About.html')
 
 
-@app.route('/next_Response5',methods=['GET', 'POST'])
+@app.route('/next_Response5',methods=['GET'])
 def next_Response5():
+    return render_template('About_MDisp.html')
+
+
+@app.route('/next_Response6',methods=['GET'])
+def next_Response6():
+    return render_template('Contact.html')
+
+
+@app.route('/next_Response7',methods=['GET'])
+def next_Response7():
+    return render_template('Contact_MDisp.html')
+
+
+
+@app.route('/next_Response8',methods=['GET', 'POST'])
+def next_Response8():
     if request.method == 'POST':
         products = request.form.get("products")
         my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
@@ -228,39 +244,28 @@ def next_Response5():
             password = x[1]
             email = x[2]
             mobile = x[3]
-        
-        with_img = glob.glob("./static/images/products/*")
-        with_img_list = []
-        for data in with_img:
-            with_img_list.append(data.split("\\")[-1].split(".")[0])
-        
-        if str(products) in with_img_list:
-            path1 = os.path.join(os.getcwd(), "static", "images", "products", f"{products}.jpeg")
-            image_data1 = convertToBinaryData(path1)
-        else:
-            path1 = str(os.getcwd()+"/static/images/placeholder.jpg","UTF-8")
-            image_data1 = convertToBinaryData(path1)
 
-        sql="INSERT INTO supply(username,pass,email,mobile,products,services,prod_images,serv_images) VALUES(%s,%s,%s,%s,%s,%s,%s,%s)"
-        val = (str(username), str(password),str(email),int(mobile),str(products),None,image_data1,None)
+        sql = "INSERT INTO supply(username,pass,email,mobile,products) VALUES(%s,%s,%s,%s,%s)"
+        val = (str(username), str(password),str(email),int(mobile),str(products))
         my_cursor.execute(sql, val)
         my_database.commit()
         my_cursor.close()
         print("Record inserted successfully in database")
-        
+
         my_cursor=my_database.cursor()
             
         my_cursor.execute("Use project")
         my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
         my_result = my_cursor.fetchall()
         try:
+            print(my_result)
             new_list1 = []
             for data in my_result:
                 print(data)
-                new_list1.append([data[4],data[5],path1,base64.b64encode(data[6]).decode('utf-8'),base64.b64encode(data[7]).decode('utf-8')])
-                print(new_list1)                
+                new_list1.append([data[4],data[5]])
             
-            # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            print(new_list1)
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
             return render_template("Supplier.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
         except:
             error_message= "Supplier not found!"
@@ -270,30 +275,8 @@ def next_Response5():
     return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
 
 
-@app.route('/next_Response6',methods=['GET'])
-def next_Response6():
-    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
-    my_cursor=my_database.cursor()
-    my_cursor.execute("Use project")
-    my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
-    my_result = my_cursor.fetchall()
-    print(my_result[0][0])
-    return render_template("Main_Prod.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3],products=my_result[0][4])
-    
-
-@app.route('/next_Response7',methods=['GET'])
-def next_Response7():
-    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
-    my_cursor=my_database.cursor()
-    my_cursor.execute("Use project")
-    my_cursor.execute("SELECT * FROM user where pass='"+str(Pwd)+"'")
-    my_result = my_cursor.fetchall()
-    print(my_result[0][0])
-    return render_template("Main_Prod.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3],services=my_result[0][4])
-
-
-@app.route('/next_Response8',methods=['GET', 'POST'])
-def next_Response8():
+@app.route('/next_Response9',methods=['GET', 'POST'])
+def next_Response9():
     if request.method == 'POST':
         services = request.form.get("services")
         my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
@@ -339,17 +322,17 @@ def next_Response8():
     return render_template("Main_Display.html", uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
 
 
-@app.route('/next_Response9',methods=['GET','POST'])
-def next_Response9():
+@app.route('/next_Response10',methods=['GET','POST'])
+def next_Response10():
     if request.method == 'POST':
         return render_template("Options.html")
     return render_template("Main_Display.html")
 
 
-@app.route('/next_Response10',methods=['GET','POST'])
-def next_Response10():
+@app.route('/next_Response11',methods=['GET','POST'])
+def next_Response11():
     if request.method == 'POST':
-        services_for = request.form.get("services")
+        services_for = request.form.get("Supplier")
         my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
         my_cursor=my_database.cursor()
         my_cursor.execute("Use project")
@@ -373,10 +356,10 @@ def next_Response10():
     
     return render_template("Options.html")
 
-@app.route('/next_Response11',methods=['GET','POST'])
-def next_Response11():
+@app.route('/next_Response12',methods=['GET','POST'])
+def next_Response12():
     if request.method == 'POST':
-        services_for = request.form.get("Srv")
+        services_for = request.form.get("Customer")
         my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
         my_cursor=my_database.cursor()
         my_cursor.execute("Use project")
@@ -398,21 +381,6 @@ def next_Response11():
             return render_template('Customer.html',error=error_message)
     
     return render_template("Options.html")
-
-
-@app.route('/next_Response12',methods=['GET'])
-def next_Response12():
-    return render_template('About_MDisp.html')
-
-
-@app.route('/next_Response13',methods=['GET'])
-def next_Response13():
-    return render_template('Contact.html')
-
-
-@app.route('/next_Response14',methods=['GET'])
-def next_Response14():
-    return render_template('Contact_MDisp.html')
 
 
 if __name__=='__main__':
