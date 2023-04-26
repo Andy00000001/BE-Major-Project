@@ -15,12 +15,23 @@
             </tr>
             {% for sub_data in data1 %}
                     <tr>
-                    <td style= "padding:15px;">{{sub_data[0]}}</td>
+                    <td style= "padding:15px;">
+                        <form action="http://localhost:5000/next_Response15" method="post">
+                        <input type="hidden" name="products" value="{{ sub_data[0] }}">
+                        <button type="submit">{{ sub_data[0] }}</button>
+                    </form></td>
                     <!--td style= "padding:15px;"><img src={{sub_data[2]}} width = "120" height = "90"/></td-->
-                    <td style= "padding:15px;">{{sub_data[1]}}</td>
+                    <td style= "padding:15px;">
+                        <form action="http://localhost:5000/next_Response13" method="post">
+                        <input type="hidden" name="services" value="{{ sub_data[1] }}">
+                        <button type="submit">{{ sub_data[1] }}</button>
+                    </form></td>
                     </tr>
             {% endfor %}
         </table>
+
+        <a href="{{url_for('next_Response14')}}">Show my products and services</button></a>
+
         <div class="menu">
             <ul>
                 <li><a href="{{url_for('next_Response3')}}">HOME</button></a></li>

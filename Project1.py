@@ -383,6 +383,103 @@ def next_Response12():
     return render_template("Options.html")
 
 
+@app.route('/next_Response13',methods=['GET', 'POST'])
+def next_Response13():
+    if request.method == 'POST':
+        services = request.form.get("services")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_cursor=my_database.cursor()
+            
+        my_cursor.execute("Use project")
+
+        my_cursor.execute("SELECT * FROM details where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        for x in my_result:
+            username = x[0]
+            password = x[1]
+            email = x[2]
+            mobile = x[3]
+
+        sql = "INSERT INTO user(username,pass,email,mobile,services) VALUES(%s,%s,%s,%s,%s)"
+        val = (str(username), str(password),str(email),int(mobile),str(services))
+        my_cursor.execute(sql, val)
+        my_database.commit()
+        print("Record inserted successfully in database")
+
+        my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        try:
+            print(my_result)
+            new_list1 = []
+            for data in my_result:
+                print(data)
+                new_list1.append([data[4],data[5]])
+            
+            print(new_list1)
+            
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Customer.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+        except:
+            error_message= "Supplier not found!"
+            return render_template('Customer.html',error=error_message)
+    
+    return render_template("Options.html")
+
+
+@app.route('/next_Response14',methods=['GET'])
+def next_Response14():
+    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_cursor=my_database.cursor()
+            
+    my_cursor.execute("Use project")
+    my_cursor.execute("SELECT products,services FROM user where pass='"+str(Pwd)+"'")
+    my_result = my_cursor.fetchall()
+    return render_template("Show.html", users=my_result)
+
+
+@app.route('/next_Response15',methods=['GET', 'POST'])
+def next_Response15():
+    if request.method == 'POST':
+        products = request.form.get("products")
+        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_cursor=my_database.cursor()
+            
+        my_cursor.execute("Use project")
+
+        my_cursor.execute("SELECT * FROM details where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        for x in my_result:
+            username = x[0]
+            password = x[1]
+            email = x[2]
+            mobile = x[3]
+
+        sql = "INSERT INTO user(username,pass,email,mobile,products) VALUES(%s,%s,%s,%s,%s)"
+        val = (str(username), str(password),str(email),int(mobile),str(products))
+        my_cursor.execute(sql, val)
+        my_database.commit()
+        print("Record inserted successfully in database")
+
+        my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
+        my_result = my_cursor.fetchall()
+        try:
+            print(my_result)
+            new_list1 = []
+            for data in my_result:
+                print(data)
+                new_list1.append([data[4],data[5]])
+            
+            print(new_list1)
+            
+        # return render_template("Supplier.html",uname=my_result[0][0], prod=my_result[0][4],srv=my_result[0][5])
+            return render_template("Customer.html", data1=new_list1, uname=my_result[0][0],email=my_result[0][2],mobile=my_result[0][3])
+        except:
+            error_message= "Supplier not found!"
+            return render_template('Customer.html',error=error_message)
+    
+    return render_template("Options.html")
+
+
 if __name__=='__main__':
     app.run(host="localhost",port=5000,threaded=False)
     
