@@ -1,0 +1,142 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Main styles */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f1f1f1;
+  }
+  
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #292f38;
+    color: #fff;
+  }
+  
+  .logo {
+    font-size: 24px;
+  }
+  
+  .content {
+    padding: 50px;
+  }
+  
+  .content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .content h2 span {
+    color: #0066cc;
+  }
+  
+  .content .par {
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  
+  .menu {
+    display: flex;
+    margin-bottom: 30px;
+  }
+  
+  .menu li {
+    list-style: none;
+    margin-right: 20px;
+  }
+  
+  .menu li a {
+    text-decoration: none;
+    color: #444;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .menu li a:hover {
+    background-color: #0066cc;
+    color: #fff;
+  }
+  
+  .form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .form input[type="text"],
+  .form input[type="password"] {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: #0066cc;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  .form button:hover {
+    cursor: pointer;
+    background-color: #0052a3;
+  }
+  
+  .form .link {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .form .link a {
+    color: #0066cc;
+  }
+  
+  .icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .icons a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #0066cc;
+    transition: all 0.3s ease;
+  }
+  
+  .icons a:hover {
+    color: #0052a3;
+  }
+  

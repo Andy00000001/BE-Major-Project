@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Major project_services page</title>
+    <link rel="stylesheet" href="static/css/style_show.css">
+</head>
+<table>
+    <tr>
+        <th>My_Products</th>
+        <th>&nbsp;</th>
+        <th>My_Services</th>
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user[0] }}</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{{ user[1] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+    <div class="form">
+        <div class="menu">
+            <ul>
+                <li><a href="{{url_for('next_Response3')}}">HOME</button></a></li>
+            </ul>
+        </div>
+        </form>
+    </div>
+
+    {% if error %}  
+    <p><strong>Error</strong>: {{error}}</p>  
+    {% endif %}
+</body>
+</html>
+<!--code by Aniruddha -->

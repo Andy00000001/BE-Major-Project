@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+    </script>
+    <title>Major project_main page</title>
+    <link rel="stylesheet" href="static/css/style_disp.css">
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">SpeeDTricK</h2>
+            </div>
+
+        </div> 
+        <div class="content">
+            <h1>Integration <br><span>Supply</span> <br>Management</h1>
+            <p class="par">join us to great auto service .  
+                 we are making a hosting platform. <br> here is the best page to find good and quality parts , 
+                <br> let's start the journey</p>
+
+                <div class="menu">
+                    <ul>
+                        <li><a href="{{url_for('next_Response3')}}">HOME</button></a></li>
+                        <li><a href="{{url_for('next_Response5')}}">ABOUT</a></li>
+                        <li><a href="{{url_for('next_Response7')}}">CONTACT</a></li>  
+                    </ul>
+                </div>
+
+                <div class="form">
+                    <form method="post" action="http://localhost:5000/next_Response10">
+                        <button class="btn" type="submit" value="services">SERVICES</button>
+                    </form>
+                </div>
+                
+
+				<caption><h2> Welcome ! </h2></caption>
+                <h3>Username : </h3>{{uname}}
+                <h3>E-Mail : </h3>{{email}}
+                <h3>Mobile Number : </h3>{{mobile}}
+				<br><br>
+                <button  onclick = "preventBack()"><a href="{{url_for('next_Response2')}}">Log Out</a></button>
+
+                
+        </div>
+    </div>
+    {% if error %}  
+    <p><strong>Error</strong>: {{error}}</p>  
+	{% endif %}
+</body>
+</html>
+<!--code by Aniruddha -->

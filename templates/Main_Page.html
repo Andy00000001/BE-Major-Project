@@ -1,13 +1,56 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Form site</title>
-    </head>
-    <body bgcolor="skyblue"><br><br>
-        <form method="post" action="http://localhost:5000/">
-			<marquee> WELCOME !!!</marquee>
-            <a href="{{url_for('next_Response1')}}">Registration</button></a>
-            <a href="{{url_for('next_Response2')}}">Login</button></a>
-        </form>
-    </body>
+<html lang="en">
+<head>
+    <title>Major project_main page</title>
+    <link rel="stylesheet" href="static/css/style_main.css">
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h1 class="logo">SpeeDTricK</h1>
+            </div>
+
+        </div> 
+        <div class="content">
+            <h2>Integration <br><span>Supply</span> <br>Management</h2>
+            <p class="par">join us to great auto service .  
+                 we are making a hosting platform. <br> here is the best page to find good and quality parts , 
+                <br> let's start the journey </p>
+
+                <div class="menu">
+                    <ul>
+                        <li><a href="{{url_for('next_Response2')}}">HOME</button></a></li>
+                        <li><a href="{{url_for('next_Response4')}}">ABOUT</a></li>
+                        <li><a href="{{url_for('next_Response6')}}">CONTACT</a></li>  
+                        <li><a href="{{url_for('next_Response1')}}">JOIN US</a></li>
+                    </ul>
+                </div>
+
+                <div class="form">
+				    <form method="post" action="http://localhost:5000/next_Response2">
+                    <h2>Login Here</h2>
+                    <input type="text" name="username" placeholder="Enter Username Here">
+                    <input type="password" name="password" placeholder="Enter Password Here">
+                    <button class="cn" type="submit" value="Submit"><a>Submit</a></button>
+					</form>
+					<ul>
+                      <p class="link">Don't have an account? <a href="{{url_for('next_Response1')}}">Sign Up</a></p>
+                    </ul>
+                    <div class="icons">
+                        <a href="https://www.facebook.com/home.php"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+    {% if error %}  
+    <p><strong>Error</strong>: {{error}}</p>  
+	{% endif %}
+</body>
 </html>
+<!--code by @Sangharaj -->

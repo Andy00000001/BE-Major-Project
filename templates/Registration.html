@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Form site</title>
-		<script type="text/javascript">
+        <script type="text/javascript">
 			function preventBack() {
 				window.history.forward(); 
 			}
@@ -10,35 +9,28 @@
 			setTimeout("preventBack()", 0);
 			  
 			window.onunload = function () { null };
-			
-	  </script>
+		</script>
+        <title>Major Project_reg page</title>
+		<link rel="stylesheet" href="static/css/style_registration.css">
     </head>
-    <body bgcolor="skyblue"><br><br>
+    <body>
+	<div class="main">
         <form method="post" action="http://localhost:5000/next_Response1">
-            <table align="center"> <caption> Registration Form </caption>
-                <tr>
-                    <td>Username : </td>
-                    <td><input type="text" name="username" placeholder="Enter Username" required></td>
-                </tr>
-                <tr>
-                    <td>Password : </td>
-                    <td><input type="password" name="password" placeholder="Enter Password" required></td>
-                </tr>
-                <tr>
-                    <td>E-Mail : </td><td><input type="email" name="email" placeholder="Enter Email" required></td>
-                </tr>
-                <tr>
-                    <td>Mobile Number : </td>
-                    <td><input type="text" name="mobile" placeholder="Enter Mobile Number" required></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Submit" onclick="flashMessage()"></td>
-                </tr>
-            </table>
+            <caption> Registration Form </caption>
+            <div class="content">
+                Username : 
+                <input type="text" name="username" placeholder="Enter Username" required>
+                Password : 
+                <input type="password" name="password" placeholder="Enter Password" required>
+                E-Mail : <input type="email" name="email" placeholder="Enter Email" required>
+                Mobile Number : 
+                    <input type="number" name="mobile" placeholder="Enter Mobile Number" required>
+                    <button class="cn" type="submit" value="Submit" onclick="flashMessage()"><a>Submit</a></button>
+			</div>
         </form>
-		{% if error %}  
-        <p><strong>Error</strong>: {{error}}</p>  
-		{% endif %}  
+	</div>
+	{% if error %}  
+    <p><strong>Error</strong>: {{error}}</p>  
+	{% endif %}  
     </body>
 </html>
