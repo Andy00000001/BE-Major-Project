@@ -2,47 +2,49 @@
 <html lang="en">
 <head>
     <title>Major project_services page</title>
-    <!--link rel="stylesheet" href="static/css/style_main.css"-->
+    <link rel="stylesheet" href="static/css/style_customer.css">
 </head>
+<body>
     <div class="form">
         <form method="post" action="http://localhost:5000/next_Response12">
-        <h2> Choose product or service: </h2>
-        <table>
-            <tr><th style= "padding:15px;">PRODUCTS</th>
-                <!--th style= "padding:15px;">PRODUCT IMAGES</th-->
-                <th style= "padding:15px;">SERVICES</th>
-                <!--th style= "padding:15px;">SERVICE IMAGES</th-->
-            </tr>
-            {% for sub_data in data1 %}
+            <h2> Choose product or service: </h2>
+            <table>
+                <tr>
+                    <th style= "padding:15px;">PRODUCTS</th>
+                    <th style= "padding:15px;">SERVICES</th>
+                </tr>
+                {% for sub_data in data1 %}
                     <tr>
-                    <td style= "padding:15px;">
-                        <form action="http://localhost:5000/next_Response15" method="post">
-                        <input type="hidden" name="products" value="{{ sub_data[0] }}">
-                        <button type="submit">{{ sub_data[0] }}</button>
-                    </form></td>
-                    <!--td style= "padding:15px;"><img src={{sub_data[2]}} width = "120" height = "90"/></td-->
-                    <td style= "padding:15px;">
-                        <form action="http://localhost:5000/next_Response13" method="post">
-                        <input type="hidden" name="services" value="{{ sub_data[1] }}">
-                        <button type="submit">{{ sub_data[1] }}</button>
-                    </form></td>
+                        <td style= "padding:15px;">
+                            <form action="http://localhost:5000/next_Response15" method="post">
+                                <input type="hidden" name="products" value="{{ sub_data[0] }}">
+                                <button type="submit">{{ sub_data[0] }}</button>
+                            </form>
+                        </td>
+                        <td style= "padding:15px;">
+                            <form action="http://localhost:5000/next_Response13" method="post">
+                                <input type="hidden" name="services" value="{{ sub_data[1] }}">
+                                <button type="submit">{{ sub_data[1] }}</button>
+                            </form>
+                        </td>
                     </tr>
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
 
-        <a href="{{url_for('next_Response14')}}">Show my products and services</button></a>
+            <a href="{{url_for('next_Response14')}}">Show my products and services</a>
 
-        <div class="menu">
-            <ul>
-                <li><a href="{{url_for('next_Response3')}}">HOME</button></a></li>
-            </ul>
-        </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="{{url_for('next_Response3')}}">HOME</a></li>
+                </ul>
+            </div>
         </form>
     </div>
 
     {% if error %}  
-    <p><strong>Error</strong>: {{error}}</p>  
+        <p><strong>Error</strong>: {{error}}</p>  
     {% endif %}
+
 </body>
 </html>
 <!--code by Aniruddha -->
