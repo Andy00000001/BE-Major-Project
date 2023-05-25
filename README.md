@@ -16,5 +16,6 @@ Requirements :
 9) Stable internet connection of minimum 5 MB/s.
 
 Additional Requirements in Python : 
-1) Flask library for Front & Back connection.
-2) 
+1) Flask framework for Frontend & Backend connection.
+2) smtplib, .email and .mime libraries for OTP to mail.
+3) mysql.connector for MySQL databse connection.
