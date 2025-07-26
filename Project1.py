@@ -80,7 +80,7 @@ def next_Response1():
             error_message = "Mobile number is Invalid!!"
             return render_template("Registration.html",error=error_message)
         else:
-            my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+            my_database=mysql.connector.connect(host="localhost",user="",password="")
             my_cursor=my_database.cursor()
             
             my_cursor.execute("Use project")
@@ -118,7 +118,7 @@ def next_Response2():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
         
         my_cursor.execute("Use project")
@@ -135,8 +135,8 @@ def next_Response2():
                   print("Success!!")
                   otp_ = random.randint(100000, 999999)
                   print(otp_,"##")
-                  sender_address = "patilaniruddha01@gmail.com"
-                  #receiver_address = "patilaniruddha@kccemsr.edu.in"
+                  sender_address = ""
+                  receiver_address = ""
                   receiver_address = x[2]
 
                   passw = "ddbfdvdnuhavvzsr"
@@ -170,7 +170,7 @@ def verification():
         otp = request.form.get("otp")
         if int(otp)==int(OTP):
             print(OTP,"Final success")
-            my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+            my_database=mysql.connector.connect(host="localhost",user="",password="")
             my_cursor=my_database.cursor()
             
             my_cursor.execute("Use project")
@@ -192,7 +192,7 @@ def verification():
 
 @app.route('/next_Response3',methods=['GET'])
 def next_Response3():
-    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_database=mysql.connector.connect(host="localhost",user="",password="")
     my_cursor=my_database.cursor()
             
     my_cursor.execute("Use project")
@@ -232,7 +232,7 @@ def next_Response7():
 def next_Response8():
     if request.method == 'POST':
         products = request.form.get("products")
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
             
         my_cursor.execute("Use project")
@@ -279,7 +279,7 @@ def next_Response8():
 def next_Response9():
     if request.method == 'POST':
         services = request.form.get("services")
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
             
         my_cursor.execute("Use project")
@@ -333,7 +333,7 @@ def next_Response10():
 def next_Response11():
     if request.method == 'POST':
         services_for = request.form.get("Supplier")
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
         my_cursor.execute("Use project")
         my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
@@ -360,7 +360,7 @@ def next_Response11():
 def next_Response12():
     if request.method == 'POST':
         services_for = request.form.get("Customer")
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
         my_cursor.execute("Use project")
         my_cursor.execute("SELECT * FROM supply where pass='"+str(Pwd)+"'")
@@ -387,7 +387,7 @@ def next_Response12():
 def next_Response13():
     if request.method == 'POST':
         services = request.form.get("services")
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
             
         my_cursor.execute("Use project")
@@ -428,7 +428,7 @@ def next_Response13():
 
 @app.route('/next_Response14',methods=['GET'])
 def next_Response14():
-    my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+    my_database=mysql.connector.connect(host="localhost",user="",password="")
     my_cursor=my_database.cursor()
             
     my_cursor.execute("Use project")
@@ -441,7 +441,7 @@ def next_Response14():
 def next_Response15():
     if request.method == 'POST':
         products = request.form.get("products")
-        my_database=mysql.connector.connect(host="localhost",user="root",password="Andy21@510101")
+        my_database=mysql.connector.connect(host="localhost",user="",password="")
         my_cursor=my_database.cursor()
             
         my_cursor.execute("Use project")
